@@ -15,14 +15,14 @@ export const selectUser = (user) => {
 // }
 
 /**
- * This is used to serach for videos.
- * @param {string} term 
+ * This is used to save the videos.
+ * @param {array} videosArray 
  */
-export const searchVideos = (term) => {
+export const saveVideos = (videosArray) => {
     //console.log('SEARCH for videos: ', term);
     return {
-        type: 'SEARCH_FOR_VIDEOS',
-        payload: term
+        type: 'SAVE_VIDEOS',
+        payload: videosArray
     }
 }
 
@@ -32,7 +32,7 @@ export const searchVideos = (term) => {
  * @param {string} txt - the text that was inserted. 
  */
 export const rememberSearchInput = (txt) => {
-    console.log('remember serach input: ', txt);
+    console.log('remember search input: ', txt);
     return {
         type: 'REMEMBER_SEARCH_INPUT',
         payload: txt

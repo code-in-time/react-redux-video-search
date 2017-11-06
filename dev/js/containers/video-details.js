@@ -15,10 +15,11 @@ class VideoDetails extends Component {
 
         // There are video to render.
         return vl.map(i => {
-            console.log('---------------------------',i);
+            //console.log('---------------------------',i);
             return (
-                <p key={i.videoRenderer.videoId} 
-                   className="bg-info">{i.videoRenderer.title.simpleText}</p>
+                <p key={i.id.videoId} 
+                   className="bg-info">
+                       <img src={i.snippet.thumbnails.default.url} alt="" /> {i.snippet.channelTitle} </p>
             );
         })
     }

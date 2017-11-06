@@ -4,10 +4,7 @@ import SearchInput from '../containers/search-input';
 import ButtonDefault from '../containers/button-default';
 import VideoDetails from '../containers/video-details';
 
-//import UserList from '../containers/user-list'
-//import UserDetail from '../containers/user-detail'
 //require('../../scss/style.scss');
-
 
 const App = () => (
     <div>

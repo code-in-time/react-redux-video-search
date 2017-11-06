@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {searchVideos} from '../actions/index';
-
+import {saveVideos} from '../actions/index';
+import Axios from 'axios';
 
 class ButtonDefault extends Component {
+
     /**
      * This will handle the click for the button onClick event.
      * 
@@ -12,11 +13,25 @@ class ButtonDefault extends Component {
      */
     onClickHandle(e) {
 
-        // The seratch term.
-        let sTerm = this.props.searchTerm;
+        // This is the state that will be returned.
+        let params = {
+                key: 'AIzaSyD5kJVZ1RHfeVBYgdcZ7tgzSowVZGUb8Og',
+                // The search term.
+                q: this.props.searchTerm,
+                maxResults: 10,
+                part: 'snippet',
+                type: 'video'
+            };
 
-        this.props.searchVideos(sTerm);
-        console.log('onClickHandle sTerm:', sTerm);
+        // Do the API call.
+        Axios.get('https://www.googleapis.com/youtube/v3/search', { params })
+            .then((response) => {
+                // Save the videos in the store.
+                this.props.saveVideos(response.data.items.slice());
+            })
+            .catch((response) => {
+                console.error(response);
+            });
     }
     
     render() {
@@ -39,7 +54,7 @@ class ButtonDefault extends Component {
  }
 
  function matchDispatchToProps(dispatch) {
-     return bindActionCreators({searchVideos:searchVideos}, dispatch);
+     return bindActionCreators({saveVideos:saveVideos}, dispatch);
  }
 
  export default connect(mapStateToProps,matchDispatchToProps)(ButtonDefault);
