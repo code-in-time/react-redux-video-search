@@ -4,10 +4,13 @@
 export default function (state=[], action) {
         
     switch (action.type) {
-        case "SAVE_VIDEOS":
+        case "FETCH_VIDEOS":
 
 
             return action.payload;
+
+            // return state.concat([action.payload.data]);
+            return [ action.payload.data, ...state ];
 
         break;
     }

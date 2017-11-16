@@ -1,28 +1,37 @@
-export const selectUser = (user) => {
-    console.log('you clicked on user: ', user.first);
-    return {
-        type: 'USER_SELECTED',
-        payload: user
-    }
-}
-
-// export const fetchVideos = () => {
-//     console.log('Action to fetch all videos ');
-//     return {
-//         type: 'VIDEOS_FETCH',
-//         payload: null
-//     }
-// }
+import Axios from 'axios';
 
 /**
- * This is used to save the videos.
- * @param {array} videosArray 
+ * The action that will fetch the videos.
+ * 
+ * @param {*string} searchTerm - the serach term.
  */
-export const saveVideos = (videosArray) => {
+export const fetchVideos = (searchTerm) => {
+
+    const request = Axios.get('https://www.googleapis.com/youtube/v3/search', {
+
+        key: 'AIzaSyD5kJVZ1RHfeVBYgdcZ7tgzSowVZGUb8Og',
+        // The search term.
+        q: searchTerm,
+        maxResults: 10,
+        part: 'snippet',
+        type: 'video'
+    });
+
+        // // Do the API call.
+        // Axios.get('https://www.googleapis.com/youtube/v3/search', { params })
+        //     .then((response) => {
+        //         // Save the videos in the store.
+        //         this.props.saveVideos(response.data.items.slice());
+        //     })
+        //     .catch((response) => {
+        //         console.error(response);
+        //     });
+
     //console.log('SEARCH for videos: ', term);
     return {
-        type: 'SAVE_VIDEOS',
-        payload: videosArray
+        type: 'FETCH_VIDEOS',
+        // this is a promise and will be resolve by the middleware.
+        payload: request
     }
 }
 

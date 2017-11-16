@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {saveVideos} from '../actions/index';
+import {fetchVideos} from '../actions/index';
 import Axios from 'axios';
 
 class ButtonDefault extends Component {
@@ -13,25 +13,27 @@ class ButtonDefault extends Component {
      */
     onClickHandle(e) {
 
-        // This is the state that will be returned.
-        let params = {
-                key: 'AIzaSyD5kJVZ1RHfeVBYgdcZ7tgzSowVZGUb8Og',
-                // The search term.
-                q: this.props.searchTerm,
-                maxResults: 10,
-                part: 'snippet',
-                type: 'video'
-            };
+        this.props.fetchVideos(this.props.searchTerm);
 
-        // Do the API call.
-        Axios.get('https://www.googleapis.com/youtube/v3/search', { params })
-            .then((response) => {
-                // Save the videos in the store.
-                this.props.saveVideos(response.data.items.slice());
-            })
-            .catch((response) => {
-                console.error(response);
-            });
+        // // This is the state that will be returned.
+        // let params = {
+        //         key: 'AIzaSyD5kJVZ1RHfeVBYgdcZ7tgzSowVZGUb8Og',
+        //         // The search term.
+        //         q: this.props.searchTerm,
+        //         maxResults: 10,
+        //         part: 'snippet',
+        //         type: 'video'
+        //     };
+
+        // // Do the API call.
+        // Axios.get('https://www.googleapis.com/youtube/v3/search', { params })
+        //     .then((response) => {
+        //         // Save the videos in the store.
+        //         this.props.saveVideos(response.data.items.slice());
+        //     })
+        //     .catch((response) => {
+        //         console.error(response);
+        //     });
     }
     
     render() {
@@ -54,7 +56,7 @@ class ButtonDefault extends Component {
  }
 
  function matchDispatchToProps(dispatch) {
-     return bindActionCreators({saveVideos:saveVideos}, dispatch);
+     return bindActionCreators({fetchVideos:fetchVideos}, dispatch);
  }
 
  export default connect(mapStateToProps,matchDispatchToProps)(ButtonDefault);
