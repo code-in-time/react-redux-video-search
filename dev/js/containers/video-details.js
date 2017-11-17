@@ -13,17 +13,17 @@ class VideoDetails extends Component {
             return <p className="bg-primary" >empty list</p>
         }
 
-        return <p>test</p>
+        //return <p>test</p>
 
-        // // There are video to render.
-        // return vl.map(i => {
-        //     //console.log('---------------------------',i);
-        //     return (
-        //         <p key={i.id.videoId} 
-        //            className="bg-info">
-        //                <img src={i.snippet.thumbnails.default.url} alt="" /> {i.snippet.channelTitle} </p>
-        //     );
-        // })
+        // There are video to render.
+        return vl.map(i => {
+            //console.log('---------------------------',i);
+            return (
+                <p key={i.id.videoId} 
+                   className="bg-info">
+                       <img src={i.snippet.thumbnails.default.url} alt="" /> {i.snippet.channelTitle} </p>
+            );
+        })
     }
 
     render() {

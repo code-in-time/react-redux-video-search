@@ -1,5 +1,8 @@
 import Axios from 'axios';
 
+export const FETCH_VIDEOS = 'FETCH_VIDEOS';
+export const REMEMBER_SEARCH_INPUT = 'REMEMBER_SEARCH_INPUT';
+
 /**
  * The action that will fetch the videos.
  * 
@@ -8,28 +11,18 @@ import Axios from 'axios';
 export const fetchVideos = (searchTerm) => {
 
     const request = Axios.get('https://www.googleapis.com/youtube/v3/search', {
-
-        key: 'AIzaSyD5kJVZ1RHfeVBYgdcZ7tgzSowVZGUb8Og',
-        // The search term.
-        q: searchTerm,
-        maxResults: 10,
-        part: 'snippet',
-        type: 'video'
+        params: {
+            key: 'AIzaSyD5kJVZ1RHfeVBYgdcZ7tgzSowVZGUb8Og',
+            // The search term.
+            q: searchTerm,
+            maxResults: 10,
+            part: 'snippet',
+            type: 'video'
+        }
     });
 
-        // // Do the API call.
-        // Axios.get('https://www.googleapis.com/youtube/v3/search', { params })
-        //     .then((response) => {
-        //         // Save the videos in the store.
-        //         this.props.saveVideos(response.data.items.slice());
-        //     })
-        //     .catch((response) => {
-        //         console.error(response);
-        //     });
-
-    //console.log('SEARCH for videos: ', term);
     return {
-        type: 'FETCH_VIDEOS',
+        type: FETCH_VIDEOS,
         // this is a promise and will be resolve by the middleware.
         payload: request
     }

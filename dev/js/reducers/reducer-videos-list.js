@@ -1,16 +1,16 @@
 
+import {FETCH_VIDEOS} from '../actions/index';
+
+
+
 
 // TODO this must also be a an API call. AXIO can be used here.
 export default function (state=[], action) {
         
     switch (action.type) {
-        case "FETCH_VIDEOS":
+        case FETCH_VIDEOS:
 
-
-            return action.payload;
-
-            // return state.concat([action.payload.data]);
-            return [ action.payload.data, ...state ];
+            return action.payload.data.items.slice();
 
         break;
     }
